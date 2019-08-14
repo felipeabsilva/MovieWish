@@ -1,9 +1,10 @@
-package com.felipesilva.moviewish
+package com.felipesilva.moviewish.view
 
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.TextView
+import com.felipesilva.moviewish.R
 
 class MainActivity : AppCompatActivity() {
 
