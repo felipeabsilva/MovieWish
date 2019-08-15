@@ -20,5 +20,10 @@ class HomeViewModel(application: Application) : AndroidViewModel(application), K
     }
 
     fun makeCallMoviesSortedByMostPopular() = repository.makeCallMoviesSortedByMostPopular()
+
+    fun makeCallMoviesSortByUpcoming() = repository.makeCallMoviesSortByUpcoming()
+
+    fun makeCallMoviesSortByTopRated() = repository.makeCallMoviesSortByTopRated()
+
     fun getMovies(): LiveData<List<Movie>> = repository.getMovies()
 }

@@ -8,4 +8,16 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <style name="TitleItemMovie" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/title_text_size</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextItemMovie" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/default_text_size</item>
+    </style>
+
 </resources>

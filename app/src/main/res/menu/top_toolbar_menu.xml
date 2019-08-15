@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!-- Settings, should always be in the overflow -->
+    <group android:checkableBehavior="single" android:id="@+id/toolbar_group_filters">
+        <item
+            android:id="@+id/toolbar_most_popular_filter"
+            android:title="Most Popular" />
+        <item
+            android:id="@+id/toolbar_top_rated_filter"
+            android:title="Top Rated" />
+        <item
+            android:id="@+id/toolbar_upcoming_filter"
+            android:title="Upcoming" />
+    </group>
+</menu>

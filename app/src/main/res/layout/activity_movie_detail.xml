@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/item_movie"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:padding="14dp">
+
+        <ImageView
+            android:id="@+id/image_movie_poster"
+            android:layout_width="200dp"
+            android:layout_height="300dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_movie_overview"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:maxLines="4"
+            android:text="A spinoff of The Fate of the Furious, focusing on Johnson's US Diplomatic Security Agent Luke Hobbs forming an unlikely alliance with Statham's Deckard Shaw."
+            android:textSize="@dimen/default_text_size"
+            app:layout_constraintBottom_toBottomOf="@id/image_movie_poster"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/image_movie_poster"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_movie_title"
+            style="@style/TitleItemMovie"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Movie Name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/image_movie_poster" />
+
+        <TextView
+            android:id="@+id/text_movie_release_date"
+            style="@style/TextItemMovie"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="September 28, 2018"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_movie_title" />
+
+        <TextView
+            android:id="@+id/text_movie_genres"
+            style="@style/TextItemMovie"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Genres: Action"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_movie_release_date" />
+
+        <TextView
+            android:id="@+id/text_production_companies"
+            style="@style/TextItemMovie"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Production: Universal Pictures"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_movie_genres" />
+
+        <TextView
+            android:id="@+id/text_vote_average"
+            style="@style/TextItemMovie"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Score: 66%"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_production_companies" />
+
+        <TextView
+            android:id="@+id/text_movie_budget"
+            style="@style/TextItemMovie"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Budget: $200,000,000.00"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_vote_average" />
+
+        <TextView
+            android:id="@+id/text_movie_revenue"
+            style="@style/TextItemMovie"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Revenue: $332,613,780.00"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_movie_budget" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

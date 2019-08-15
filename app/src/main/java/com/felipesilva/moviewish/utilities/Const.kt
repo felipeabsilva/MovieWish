@@ -3,6 +3,9 @@ package com.felipesilva.moviewish.utilities
 object API {
     const val BASE_URL = "https://api.themoviedb.org/"
 
+    const val IMAGE_POSTER_URL = "https://image.tmdb.org/t/p/w185_and_h278_bestv2"
+    const val IMAGE_DETAIL_POSTER_URL = "https://image.tmdb.org/t/p/w600_and_h900_bestv2/"
+
     private const val API_VERSION_3 = "3"
     private const val API_VERSION_4 = "4"
 
