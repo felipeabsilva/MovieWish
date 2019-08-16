@@ -1,4 +1,4 @@
-package com.felipesilva.moviewish.data.database
+package com.felipesilva.moviewish.data.database.moviedetails
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -10,7 +10,8 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MovieDetailsDatabaseImpl(retrofitConfig: RetrofitConfig) : MovieDetailsDatabase {
+class MovieDetailsDatabaseImpl(retrofitConfig: RetrofitConfig) :
+    MovieDetailsDatabase {
     private val movieDetails: MutableLiveData<MovieDetails> = MutableLiveData()
 
     private val api = retrofitConfig.buildRetrofit()
@@ -18,13 +19,19 @@ class MovieDetailsDatabaseImpl(retrofitConfig: RetrofitConfig) : MovieDetailsDat
 
     private val handleMovieDetailsCallback = object : Callback<MovieDetails> {
         override fun onResponse(call: Call<MovieDetails>, response: Response<MovieDetails>) {
-            response.body()?.let {
-                loadMovieDetails(it)
+            response.apply {
+                if (this.body() != null) {
+                    this.body()?.let {
+                        loadMovieDetails(it)
+                    }
+                } else {
+                    movieDetails.value = null
+                }
             }
         }
 
         override fun onFailure(call: Call<MovieDetails>, t: Throwable) {
-            Log.d("MovieDetailsDatabase", "Error on loading movie details")
+            Log.e("MoviesDetailsDatabase", "Error on movie details call")
         }
 
     }

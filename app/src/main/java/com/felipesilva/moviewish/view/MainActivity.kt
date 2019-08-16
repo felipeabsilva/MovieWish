@@ -1,11 +1,8 @@
 package com.felipesilva.moviewish.view
 
 import android.os.Bundle
-import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-import androidx.core.view.get
 import androidx.lifecycle.ViewModelProviders
 import com.felipesilva.moviewish.R
 import com.felipesilva.moviewish.view.fragment.GenresFragment
@@ -13,7 +10,6 @@ import com.felipesilva.moviewish.view.fragment.HomeFragment
 import com.felipesilva.moviewish.viewmodel.HomeViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main.view.*
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.closestKodein
@@ -56,31 +52,25 @@ class MainActivity : AppCompatActivity(), KodeinAware {
         false
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.top_toolbar_menu, menu)
-
-        menu?.let {
-            it.findItem(R.id.toolbar_most_popular_filter).isChecked = true
-        }
-        return true
-    }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
         R.id.toolbar_most_popular_filter -> {
             homeViewModel.makeCallMoviesSortedByMostPopular()
             item.isChecked = true
+            title = item.title
             true
         }
 
         R.id.toolbar_top_rated_filter -> {
             homeViewModel.makeCallMoviesSortByTopRated()
             item.isChecked = true
+            title = item.title
             true
         }
 
         R.id.toolbar_upcoming_filter -> {
             homeViewModel.makeCallMoviesSortByUpcoming()
             item.isChecked = true
+            title = item.title
             true
         }
 

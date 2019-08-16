@@ -1,9 +1,9 @@
-package com.felipesilva.moviewish.repository
+package com.felipesilva.moviewish.repository.movies
 
 import androidx.lifecycle.LiveData
 import com.felipesilva.moviewish.data.model.Movie
 
-interface Repository {
+interface MoviesRepository {
     fun makeCallMoviesSortedByMostPopular()
     fun makeCallMoviesSortByTopRated()
     fun makeCallMoviesSortByUpcoming()

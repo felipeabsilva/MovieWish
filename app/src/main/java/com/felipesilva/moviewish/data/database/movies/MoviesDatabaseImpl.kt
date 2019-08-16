@@ -1,6 +1,5 @@
-package com.felipesilva.moviewish.data.database
+package com.felipesilva.moviewish.data.database.movies
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.felipesilva.moviewish.data.model.Movie
@@ -13,7 +12,8 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
 
-class MoviesDatabaseImpl(retrofitConfig: RetrofitConfig) : MoviesDatabase {
+class MoviesDatabaseImpl(retrofitConfig: RetrofitConfig) :
+    MoviesDatabase {
     private val moviesList = mutableListOf<Movie>()
     private val movies: MutableLiveData<List<Movie>> = MutableLiveData()
 
@@ -22,13 +22,19 @@ class MoviesDatabaseImpl(retrofitConfig: RetrofitConfig) : MoviesDatabase {
 
     private val handleMoviesCallback = object : Callback<Movies> {
         override fun onResponse(call: Call<Movies>, response: Response<Movies>) {
-            response.body()?.let {
-                loadMovies(it)
+            response.apply {
+                if (this.body() != null) {
+                    response.body()?.let {
+                        loadMovies(it)
+                    }
+                } else {
+                    movies.value = null
+                }
             }
         }
 
         override fun onFailure(call: Call<Movies>, t: Throwable) {
-            Log.d("MoviesDatabaseImpl", "Connection movies failed!")
+            movies.value = null
         }
     }
 
@@ -40,7 +46,8 @@ class MoviesDatabaseImpl(retrofitConfig: RetrofitConfig) : MoviesDatabase {
     override fun makeCallMoviesSortByUpcoming() =
         api.makeCallMoviesSortByUpcoming(Date().getCurrentFormmatedDate()).enqueue(handleMoviesCallback)
 
-    override fun makeCallMoviesByGenre(genreId: String) = api.makeCallMoviesByGenre(genreId).enqueue(handleMoviesCallback)
+    override fun makeCallMoviesByGenre(genreId: String) =
+        api.makeCallMoviesByGenre(genreId).enqueue(handleMoviesCallback)
 
     override fun loadMovies(movies: Movies) {
         if (moviesList.isNotEmpty())

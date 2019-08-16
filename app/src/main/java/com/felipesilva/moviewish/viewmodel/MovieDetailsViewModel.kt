@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData
 import com.felipesilva.moviewish.data.model.Genre
 import com.felipesilva.moviewish.data.model.MovieDetails
 import com.felipesilva.moviewish.data.model.ProductionCompanie
-import com.felipesilva.moviewish.repository.MovieDetailsRepository
+import com.felipesilva.moviewish.repository.moviedetails.MovieDetailsRepository
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.closestKodein

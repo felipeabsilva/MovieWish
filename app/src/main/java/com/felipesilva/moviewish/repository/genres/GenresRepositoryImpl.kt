@@ -1,11 +1,12 @@
-package com.felipesilva.moviewish.repository
+package com.felipesilva.moviewish.repository.genres
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.felipesilva.moviewish.data.database.GenresDatabase
+import com.felipesilva.moviewish.data.database.genres.GenresDatabase
 import com.felipesilva.moviewish.data.model.Genres
 
-class GenresRepositoryImpl(private val genresDatabase: GenresDatabase) : GenresRepository {
+class GenresRepositoryImpl(private val genresDatabase: GenresDatabase) :
+    GenresRepository {
     private val genresList: MutableLiveData<Genres> = MutableLiveData()
 
     init {

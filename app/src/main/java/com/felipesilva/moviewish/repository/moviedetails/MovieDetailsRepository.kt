@@ -1,10 +1,9 @@
-package com.felipesilva.moviewish.data.database
+package com.felipesilva.moviewish.repository.moviedetails
 
 import androidx.lifecycle.LiveData
 import com.felipesilva.moviewish.data.model.MovieDetails
 
-interface MovieDetailsDatabase {
+interface MovieDetailsRepository {
     fun makeCallMovieDetails(movieId: Int)
-    fun loadMovieDetails(movieDetails: MovieDetails)
     fun getMovieDetails(): LiveData<MovieDetails>
 }

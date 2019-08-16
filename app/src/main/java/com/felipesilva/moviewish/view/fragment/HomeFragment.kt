@@ -1,6 +1,5 @@
 package com.felipesilva.moviewish.view.fragment
 
-import android.content.Context
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -10,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.felipesilva.moviewish.R
 import com.felipesilva.moviewish.adapter.MoviesListAdapter
 import com.felipesilva.moviewish.data.model.Movie
+import com.felipesilva.moviewish.utilities.showToastLongMessage
 import com.felipesilva.moviewish.viewmodel.HomeViewModel
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
@@ -26,10 +26,15 @@ class HomeFragment : Fragment() {
         val bundle = arguments
         if (bundle != null) {
             val genreId = bundle.getString("genre_id")
-            if (genreId != null) {
+            val genreName = bundle.getString("genre_name")
+            if (genreId != null && genreName != null) {
+                setHasOptionsMenu(false)
+                activity?.title = genreName
                 homeViewModel.makeCallMoviesByGenre(genreId)
             }
         } else {
+            activity?.title = "Most Popular"
+            setHasOptionsMenu(true)
             homeViewModel.makeCallMoviesSortedByMostPopular()
         }
 
@@ -39,12 +44,14 @@ class HomeFragment : Fragment() {
         }
 
         homeViewModel.getMovies().observe(this, Observer { movies ->
-            movies?.let {
+            if (movies != null) {
                 if (moviesList.isNotEmpty())
                     moviesList.clear()
 
-                moviesList.addAll(it)
+                moviesList.addAll(movies)
                 recycler_view_home.adapter?.notifyDataSetChanged()
+            } else {
+                this.context?.showToastLongMessage("Connection error")
             }
         })
 
@@ -53,5 +60,11 @@ class HomeFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         inflater?.inflate(R.menu.top_toolbar_menu, menu)
+
+        menu?.let {
+            it.findItem(R.id.toolbar_most_popular_filter).isChecked = true
+        }
+
+        super.onCreateOptionsMenu(menu, inflater)
     }
 }

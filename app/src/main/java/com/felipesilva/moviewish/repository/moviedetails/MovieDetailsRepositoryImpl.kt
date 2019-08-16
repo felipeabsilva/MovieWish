@@ -1,11 +1,12 @@
-package com.felipesilva.moviewish.repository
+package com.felipesilva.moviewish.repository.moviedetails
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.felipesilva.moviewish.data.database.MovieDetailsDatabase
+import com.felipesilva.moviewish.data.database.moviedetails.MovieDetailsDatabase
 import com.felipesilva.moviewish.data.model.MovieDetails
 
-class MovieDetailsRepositoryImpl(private val moviesDetailsDatabase: MovieDetailsDatabase) : MovieDetailsRepository {
+class MovieDetailsRepositoryImpl(private val moviesDetailsDatabase: MovieDetailsDatabase) :
+    MovieDetailsRepository {
     private val movieDetails: MutableLiveData<MovieDetails> = MutableLiveData()
 
     init {

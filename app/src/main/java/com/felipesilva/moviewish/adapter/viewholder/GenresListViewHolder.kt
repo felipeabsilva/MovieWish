@@ -25,8 +25,10 @@ class GenresListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), 
         itemGenre.setOnClickListener {
             val bundle = Bundle()
             bundle.putString("genre_id", genre.id.toString())
+            bundle.putString("genre_name", genre.name)
             homeFragment.arguments = bundle
-            (itemView.context as AppCompatActivity).supportFragmentManager.beginTransaction().replace(R.id.frame_layout_main, homeFragment).commit()
+            (itemView.context as AppCompatActivity).supportFragmentManager.beginTransaction()
+                .replace(R.id.frame_layout_main, homeFragment).commit()
         }
     }
 }

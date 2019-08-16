@@ -1,4 +1,4 @@
-package com.felipesilva.moviewish.data.database
+package com.felipesilva.moviewish.data.database.genres
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -10,22 +10,29 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class GenresDatabaseImpl(retrofitConfig: RetrofitConfig) : GenresDatabase {
+class GenresDatabaseImpl(retrofitConfig: RetrofitConfig) :
+    GenresDatabase {
     private val genres: MutableLiveData<Genres> = MutableLiveData()
 
     private val api = retrofitConfig
         .buildRetrofit()
         .create(MovieAPI::class.java)
 
-    private val handleGenresCallback = object: Callback<Genres> {
+    private val handleGenresCallback = object : Callback<Genres> {
         override fun onResponse(call: Call<Genres>, response: Response<Genres>) {
-            response.body()?.let {
-                loadGenresList(it)
+            response.apply {
+                if (this.body() != null) {
+                    this.body()?.let {
+                        loadGenresList(it)
+                    }
+                } else {
+                    genres.value = null
+                }
             }
         }
 
         override fun onFailure(call: Call<Genres>, t: Throwable) {
-            Log.d("GenresDatabase", "Error on getting genres")
+            Log.e("GenresDatabase", "Error on genres call")
         }
 
     }

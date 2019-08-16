@@ -3,9 +3,8 @@ package com.felipesilva.moviewish.viewmodel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
 import com.felipesilva.moviewish.data.model.Movie
-import com.felipesilva.moviewish.repository.Repository
+import com.felipesilva.moviewish.repository.movies.MoviesRepository
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.closestKodein
@@ -13,15 +12,15 @@ import org.kodein.di.generic.instance
 
 class HomeViewModel(application: Application) : AndroidViewModel(application), KodeinAware {
     override val kodein: Kodein by closestKodein(application.applicationContext)
-    val repository: Repository by instance()
+    val moviesRepository: MoviesRepository by instance()
 
-    fun makeCallMoviesSortedByMostPopular() = repository.makeCallMoviesSortedByMostPopular()
+    fun makeCallMoviesSortedByMostPopular() = moviesRepository.makeCallMoviesSortedByMostPopular()
 
-    fun makeCallMoviesSortByUpcoming() = repository.makeCallMoviesSortByUpcoming()
+    fun makeCallMoviesSortByUpcoming() = moviesRepository.makeCallMoviesSortByUpcoming()
 
-    fun makeCallMoviesSortByTopRated() = repository.makeCallMoviesSortByTopRated()
+    fun makeCallMoviesSortByTopRated() = moviesRepository.makeCallMoviesSortByTopRated()
 
-    fun makeCallMoviesByGenre(genreId: String) = repository.makeCallMoviesByGenre(genreId)
+    fun makeCallMoviesByGenre(genreId: String) = moviesRepository.makeCallMoviesByGenre(genreId)
 
-    fun getMovies(): LiveData<List<Movie>> = repository.getMovies()
+    fun getMovies(): LiveData<List<Movie>> = moviesRepository.getMovies()
 }

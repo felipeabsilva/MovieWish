@@ -1,4 +1,4 @@
-package com.felipesilva.moviewish.data.database
+package com.felipesilva.moviewish.data.database.movies
 
 import androidx.lifecycle.LiveData
 import com.felipesilva.moviewish.data.model.Movie

@@ -3,6 +3,7 @@ package com.felipesilva.moviewish.utilities
 import android.content.Context
 import android.net.ConnectivityManager
 import android.widget.ImageView
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import java.text.SimpleDateFormat
 import java.util.*
@@ -20,4 +21,8 @@ fun ImageView.setImageWithGlide(path: String?) {
             .load(path)
             .into(this)
     }
+}
+
+fun Context.showToastLongMessage(message: String) {
+    Toast.makeText(this, message, Toast.LENGTH_LONG).show()
 }

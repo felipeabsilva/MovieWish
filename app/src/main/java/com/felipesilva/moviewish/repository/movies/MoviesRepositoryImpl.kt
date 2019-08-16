@@ -1,23 +1,27 @@
-package com.felipesilva.moviewish.repository
+package com.felipesilva.moviewish.repository.movies
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.felipesilva.moviewish.data.database.MoviesDatabase
+import com.felipesilva.moviewish.data.database.movies.MoviesDatabase
 import com.felipesilva.moviewish.data.model.Movie
 
-class RepositoryImpl(private val moviesDatabase: MoviesDatabase) : Repository {
+class MoviesRepositoryImpl(private val moviesDatabase: MoviesDatabase) :
+    MoviesRepository {
     private val moviesList = mutableListOf<Movie>()
     private val movies: MutableLiveData<List<Movie>> = MutableLiveData()
 
     init {
         moviesDatabase.getMovies().observeForever {
-            it?.let {
+            if (it != null) {
                 if (moviesList.isNotEmpty())
                     moviesList.clear()
-            }
 
-            moviesList.addAll(it)
-            movies.value = moviesList
+                moviesList.addAll(it)
+
+                movies.value = moviesList
+            } else {
+                movies.value = it
+            }
         }
     }
 

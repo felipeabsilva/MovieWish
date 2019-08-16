@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import com.felipesilva.moviewish.data.model.Genres
-import com.felipesilva.moviewish.repository.GenresRepository
+import com.felipesilva.moviewish.repository.genres.GenresRepository
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.closestKodein

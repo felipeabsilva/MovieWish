@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.felipesilva.moviewish.R
 import com.felipesilva.moviewish.adapter.GenresListAdapter
 import com.felipesilva.moviewish.data.model.Genre
+import com.felipesilva.moviewish.utilities.showToastLongMessage
 import com.felipesilva.moviewish.viewmodel.GenresViewModel
 import kotlinx.android.synthetic.main.fragment_genres.*
 import kotlinx.android.synthetic.main.fragment_genres.view.*
@@ -24,18 +25,22 @@ class GenresFragment : Fragment() {
 
         genresViewModel = ViewModelProviders.of(this).get(GenresViewModel::class.java)
 
+        activity?.title = "Genres"
+
         view.recycler_view_genres.apply {
             layoutManager = LinearLayoutManager(this@GenresFragment.context)
             adapter = GenresListAdapter(genresList)
         }
 
         genresViewModel.getGenresList().observe(this, Observer { genres ->
-            genres?.let {
+            if (genres != null) {
                 if (genresList.isNotEmpty())
                     genresList.clear()
 
-                genresList.addAll(it.genres)
+                genresList.addAll(genres.genres)
                 recycler_view_genres.adapter?.notifyDataSetChanged()
+            } else {
+                this.context?.showToastLongMessage("Connection error")
             }
         })
 
