@@ -2,6 +2,7 @@ package com.felipesilva.moviewish.view
 
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import com.felipesilva.moviewish.R
@@ -55,22 +56,19 @@ class MainActivity : AppCompatActivity(), KodeinAware {
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
         R.id.toolbar_most_popular_filter -> {
             homeViewModel.makeCallMoviesSortedByMostPopular()
-            item.isChecked = true
-            title = item.title
+            handleOnMenuItemSelected(item)
             true
         }
 
         R.id.toolbar_top_rated_filter -> {
             homeViewModel.makeCallMoviesSortByTopRated()
-            item.isChecked = true
-            title = item.title
+            handleOnMenuItemSelected(item)
             true
         }
 
         R.id.toolbar_upcoming_filter -> {
             homeViewModel.makeCallMoviesSortByUpcoming()
-            item.isChecked = true
-            title = item.title
+            handleOnMenuItemSelected(item)
             true
         }
 
@@ -85,5 +83,12 @@ class MainActivity : AppCompatActivity(), KodeinAware {
 
     private fun bringGenresFragment() {
         supportFragmentManager.beginTransaction().replace(R.id.frame_layout_main, genresFragment).commit()
+    }
+
+    private fun handleOnMenuItemSelected(item: MenuItem) {
+        item.isChecked = true
+        title = item.title
+        frame_layout_main.visibility = View.GONE
+        main_progress_bar.visibility = View.VISIBLE
     }
 }

@@ -9,8 +9,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.felipesilva.moviewish.R
 import com.felipesilva.moviewish.adapter.MoviesListAdapter
 import com.felipesilva.moviewish.data.model.Movie
+import com.felipesilva.moviewish.utilities.SharedParameter
 import com.felipesilva.moviewish.utilities.showToastLongMessage
 import com.felipesilva.moviewish.viewmodel.HomeViewModel
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 
@@ -23,37 +25,13 @@ class HomeFragment : Fragment() {
 
         homeViewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
 
-        val bundle = arguments
-        if (bundle != null) {
-            val genreId = bundle.getString("genre_id")
-            val genreName = bundle.getString("genre_name")
-            if (genreId != null && genreName != null) {
-                setHasOptionsMenu(false)
-                activity?.title = genreName
-                homeViewModel.makeCallMoviesByGenre(genreId)
-            }
-        } else {
-            activity?.title = "Most Popular"
-            setHasOptionsMenu(true)
-            homeViewModel.makeCallMoviesSortedByMostPopular()
-        }
+        handleProgressBarAndFrameLayoutVisibility(View.GONE, View.VISIBLE)
 
-        view.recycler_view_home.apply {
-            layoutManager = LinearLayoutManager(this@HomeFragment.context)
-            adapter = MoviesListAdapter(moviesList)
-        }
+        handleMovieListCall()
 
-        homeViewModel.getMovies().observe(this, Observer { movies ->
-            if (movies != null) {
-                if (moviesList.isNotEmpty())
-                    moviesList.clear()
+        setMoviesRecyclerView(view)
 
-                moviesList.addAll(movies)
-                recycler_view_home.adapter?.notifyDataSetChanged()
-            } else {
-                this.context?.showToastLongMessage("Connection error")
-            }
-        })
+        setMoviesObserver()
 
         return view
     }
@@ -66,5 +44,50 @@ class HomeFragment : Fragment() {
         }
 
         super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    private fun handleProgressBarAndFrameLayoutVisibility(frameVisibility: Int, progressBarVisibility: Int) {
+        activity?.frame_layout_main?.visibility = frameVisibility
+        activity?.main_progress_bar?.visibility = progressBarVisibility
+    }
+
+    private fun handleMovieListCall() {
+        val bundle = arguments
+        if (bundle != null) {
+            val genreId = bundle.getString(SharedParameter.GENRE_ID)
+            val genreName = bundle.getString(SharedParameter.GENRE_NAME)
+            if (genreId != null && genreName != null) {
+                setHasOptionsMenu(false)
+                activity?.title = genreName
+                homeViewModel.makeCallMoviesByGenre(genreId)
+            }
+        } else {
+            activity?.title = getString(R.string.most_popular)
+            setHasOptionsMenu(true)
+            homeViewModel.makeCallMoviesSortedByMostPopular()
+        }
+    }
+
+    private fun setMoviesRecyclerView(view: View) {
+        view.recycler_view_home.apply {
+            layoutManager = LinearLayoutManager(this@HomeFragment.context)
+            adapter = MoviesListAdapter(moviesList)
+        }
+    }
+
+    private fun setMoviesObserver() {
+        homeViewModel.getMovies().observe(this, Observer { movies ->
+            if (movies != null) {
+                if (moviesList.isNotEmpty())
+                    moviesList.clear()
+
+                moviesList.addAll(movies)
+                handleProgressBarAndFrameLayoutVisibility(View.VISIBLE, View.GONE)
+                recycler_view_home.adapter?.notifyDataSetChanged()
+            } else {
+                handleProgressBarAndFrameLayoutVisibility(View.GONE, View.GONE)
+                this.context?.showToastLongMessage(getString(R.string.connection_error))
+            }
+        })
     }
 }

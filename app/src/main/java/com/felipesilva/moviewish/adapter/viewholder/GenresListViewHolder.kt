@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.felipesilva.moviewish.R
 import com.felipesilva.moviewish.data.model.Genre
+import com.felipesilva.moviewish.utilities.SharedParameter
 import com.felipesilva.moviewish.view.fragment.HomeFragment
 import kotlinx.android.synthetic.main.item_genre.view.*
 import org.kodein.di.Kodein
@@ -24,8 +25,8 @@ class GenresListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), 
 
         itemGenre.setOnClickListener {
             val bundle = Bundle()
-            bundle.putString("genre_id", genre.id.toString())
-            bundle.putString("genre_name", genre.name)
+            bundle.putString(SharedParameter.GENRE_ID, genre.id.toString())
+            bundle.putString(SharedParameter.GENRE_NAME, genre.name)
             homeFragment.arguments = bundle
             (itemView.context as AppCompatActivity).supportFragmentManager.beginTransaction()
                 .replace(R.id.frame_layout_main, homeFragment).commit()
