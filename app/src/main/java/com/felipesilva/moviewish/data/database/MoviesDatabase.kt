@@ -11,4 +11,5 @@ interface MoviesDatabase {
     fun makeCallMoviesSortByUpcoming()
     fun loadMovies(movies: Movies)
     fun getMovies(): LiveData<List<Movie>>
+    fun makeCallMoviesByGenre(genreId: String)
 }

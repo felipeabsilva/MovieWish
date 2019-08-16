@@ -40,6 +40,8 @@ class MoviesDatabaseImpl(retrofitConfig: RetrofitConfig) : MoviesDatabase {
     override fun makeCallMoviesSortByUpcoming() =
         api.makeCallMoviesSortByUpcoming(Date().getCurrentFormmatedDate()).enqueue(handleMoviesCallback)
 
+    override fun makeCallMoviesByGenre(genreId: String) = api.makeCallMoviesByGenre(genreId).enqueue(handleMoviesCallback)
+
     override fun loadMovies(movies: Movies) {
         if (moviesList.isNotEmpty())
             moviesList.clear()

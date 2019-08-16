@@ -3,27 +3,35 @@ package com.felipesilva.moviewish.view
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.core.view.get
 import androidx.lifecycle.ViewModelProviders
 import com.felipesilva.moviewish.R
 import com.felipesilva.moviewish.view.fragment.GenresFragment
 import com.felipesilva.moviewish.view.fragment.HomeFragment
 import com.felipesilva.moviewish.viewmodel.HomeViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.view.*
+import org.kodein.di.Kodein
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.closestKodein
+import org.kodein.di.generic.instance
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), KodeinAware {
+    override val kodein: Kodein by closestKodein()
     private lateinit var homeViewModel: HomeViewModel
-    private lateinit var homeFragment: HomeFragment
-    private lateinit var genresFragment: GenresFragment
+    private val homeFragment: HomeFragment by instance()
+    private val genresFragment: GenresFragment by instance()
+    private lateinit var navView: BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val navView: BottomNavigationView = findViewById(R.id.nav_view_main)
+        navView = nav_view_main
 
         homeViewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
-        homeFragment = HomeFragment()
-        genresFragment = GenresFragment()
 
         navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
 
@@ -50,6 +58,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.top_toolbar_menu, menu)
+
         menu?.let {
             it.findItem(R.id.toolbar_most_popular_filter).isChecked = true
         }

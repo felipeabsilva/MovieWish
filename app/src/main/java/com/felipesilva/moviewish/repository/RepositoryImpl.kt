@@ -27,5 +27,7 @@ class RepositoryImpl(private val moviesDatabase: MoviesDatabase) : Repository {
 
     override fun makeCallMoviesSortByTopRated() = moviesDatabase.makeCallMoviesSortByTopRated()
 
+    override fun makeCallMoviesByGenre(genreId: String) = moviesDatabase.makeCallMoviesByGenre(genreId)
+
     override fun getMovies(): LiveData<List<Movie>> = movies
 }

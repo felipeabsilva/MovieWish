@@ -8,4 +8,5 @@ interface Repository {
     fun makeCallMoviesSortByTopRated()
     fun makeCallMoviesSortByUpcoming()
     fun getMovies(): LiveData<List<Movie>>
+    fun makeCallMoviesByGenre(genreId: String)
 }

@@ -1,5 +1,6 @@
 package com.felipesilva.moviewish.view.fragment
 
+import android.content.Context
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -21,6 +22,16 @@ class HomeFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
         homeViewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
+
+        val bundle = arguments
+        if (bundle != null) {
+            val genreId = bundle.getString("genre_id")
+            if (genreId != null) {
+                homeViewModel.makeCallMoviesByGenre(genreId)
+            }
+        } else {
+            homeViewModel.makeCallMoviesSortedByMostPopular()
+        }
 
         view.recycler_view_home.apply {
             layoutManager = LinearLayoutManager(this@HomeFragment.context)

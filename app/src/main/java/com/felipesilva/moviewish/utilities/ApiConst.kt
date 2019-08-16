@@ -30,6 +30,8 @@ object API {
         const val LANGUAGE_KEY = "language"
         const val LANGUAGE_EN_US_VALUE = "en-US"
 
+        const val WITH_GENRES_KEY= "with_genres"
+
         const val SORT_BY_KEY = "sort_by"
         const val SORT_BY_POPULARITY_DESC_VALUE = "popularity.desc"
         const val SORT_BY_VOTE_AVERAGE_DESC_VALUE = "vote_average.desc"

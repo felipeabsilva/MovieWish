@@ -15,15 +15,13 @@ class HomeViewModel(application: Application) : AndroidViewModel(application), K
     override val kodein: Kodein by closestKodein(application.applicationContext)
     val repository: Repository by instance()
 
-    init {
-        repository.makeCallMoviesSortedByMostPopular()
-    }
-
     fun makeCallMoviesSortedByMostPopular() = repository.makeCallMoviesSortedByMostPopular()
 
     fun makeCallMoviesSortByUpcoming() = repository.makeCallMoviesSortByUpcoming()
 
     fun makeCallMoviesSortByTopRated() = repository.makeCallMoviesSortByTopRated()
+
+    fun makeCallMoviesByGenre(genreId: String) = repository.makeCallMoviesByGenre(genreId)
 
     fun getMovies(): LiveData<List<Movie>> = repository.getMovies()
 }
