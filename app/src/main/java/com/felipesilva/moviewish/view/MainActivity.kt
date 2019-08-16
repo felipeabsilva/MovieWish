@@ -41,12 +41,12 @@ class MainActivity : AppCompatActivity(), KodeinAware {
                 bringHomeFragment()
                 return@OnNavigationItemSelectedListener true
             }
-            R.id.navigation_dashboard -> {
+            R.id.navigation_genres -> {
                 bringGenresFragment()
                 return@OnNavigationItemSelectedListener true
             }
-            R.id.navigation_notifications -> {
-
+            R.id.navigation_exit -> {
+                finish()
                 return@OnNavigationItemSelectedListener true
             }
         }
