@@ -16,11 +16,19 @@ object API {
     }
 
     object Path {
-        const val MOVIE_DISCOVER = "${API_VERSION_4}/discover/movie"
+        const val MOVIE_ID_KEY = "movie_id"
+
+        const val MOVIE_DISCOVER = "$API_VERSION_4/discover/movie"
+        const val MOVIE_DETAILS = "$API_VERSION_3/movie/{$MOVIE_ID_KEY}"
+        const val GENRE_LIST = "$API_VERSION_3/genre/movie/list"
     }
 
     object Query {
-        const val API_KEY = "57178ec577bff44cab1aa9c634130c7c"
+        const val API_KEY_VALUE = "57178ec577bff44cab1aa9c634130c7c"
+        const val API_KEY_KEY = "api_key"
+
+        const val LANGUAGE_KEY = "language"
+        const val LANGUAGE_EN_US_VALUE = "en-US"
 
         const val SORT_BY_KEY = "sort_by"
         const val SORT_BY_POPULARITY_DESC_VALUE = "popularity.desc"

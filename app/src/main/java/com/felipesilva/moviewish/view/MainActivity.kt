@@ -7,12 +7,14 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import com.felipesilva.moviewish.R
+import com.felipesilva.moviewish.view.fragment.GenresFragment
 import com.felipesilva.moviewish.view.fragment.HomeFragment
 import com.felipesilva.moviewish.viewmodel.HomeViewModel
 
 class MainActivity : AppCompatActivity() {
     private lateinit var homeViewModel: HomeViewModel
     private lateinit var homeFragment: HomeFragment
+    private lateinit var genresFragment: GenresFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,20 +23,21 @@ class MainActivity : AppCompatActivity() {
 
         homeViewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
         homeFragment = HomeFragment()
+        genresFragment = GenresFragment()
 
         navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
 
-        startHomeFragment()
+        bringHomeFragment()
     }
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_home -> {
-
+                bringHomeFragment()
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_dashboard -> {
-
+                bringGenresFragment()
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_notifications -> {
@@ -77,7 +80,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun startHomeFragment() {
+    private fun bringHomeFragment() {
         supportFragmentManager.beginTransaction().replace(R.id.frame_layout_main, homeFragment).commit()
+    }
+
+    private fun bringGenresFragment() {
+        supportFragmentManager.beginTransaction().replace(R.id.frame_layout_main, genresFragment).commit()
     }
 }

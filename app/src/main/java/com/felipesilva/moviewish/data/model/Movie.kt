@@ -7,25 +7,6 @@ data class Movies(
     val results: List<Movie>
 )
 
-/**
-"popularity": 456.135,
-"vote_count": 568,
-"video": false,
-"poster_path": "/keym7MPn1icW1wWfzMnW3HeuzWU.jpg",
-"id": 384018,
-"adult": false,
-"backdrop_path": "/hpgda6P9GutvdkDX5MUJ92QG9aj.jpg",
-"original_language": "en",
-"original_title": "Fast & Furious Presents: Hobbs & Shaw",
-"genre_ids": [
-28
-],
-"title": "Fast & Furious Presents: Hobbs & Shaw",
-"vote_average": 6.5,
-"overview": "A spinoff of The Fate of the Furious, focusing on Johnson's US Diplomatic Security Agent Luke Hobbs forming an unlikely alliance with Statham's Deckard Shaw.",
-"release_date": "2019-08-02"
- */
-
 data class Movie(
     @SerializedName("popularity") val popularity: Double,
     @SerializedName("vote_count") val voteCount: Int,

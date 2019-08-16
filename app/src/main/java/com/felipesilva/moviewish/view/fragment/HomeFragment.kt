@@ -22,6 +22,11 @@ class HomeFragment : Fragment() {
 
         homeViewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
 
+        view.recycler_view_home.apply {
+            layoutManager = LinearLayoutManager(this@HomeFragment.context)
+            adapter = MoviesListAdapter(moviesList)
+        }
+
         homeViewModel.getMovies().observe(this, Observer { movies ->
             movies?.let {
                 if (moviesList.isNotEmpty())
@@ -31,11 +36,6 @@ class HomeFragment : Fragment() {
                 recycler_view_home.adapter?.notifyDataSetChanged()
             }
         })
-
-        view.recycler_view_home.apply {
-            layoutManager = LinearLayoutManager(this@HomeFragment.context)
-            adapter = MoviesListAdapter(moviesList)
-        }
 
         return view
     }
