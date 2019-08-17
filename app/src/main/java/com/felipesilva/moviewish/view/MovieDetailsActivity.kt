@@ -1,6 +1,7 @@
 package com.felipesilva.moviewish.view
 
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -63,5 +64,20 @@ class MovieDetailsActivity : AppCompatActivity() {
                 this.showToastLongMessage(getString(R.string.connection_error))
             }
         })
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when(item.itemId) {
+        android.R.id.home -> {
+            onBackPressed()
+            true
+        }
+        else -> {
+            super.onOptionsItemSelected(item)
+        }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
     }
 }

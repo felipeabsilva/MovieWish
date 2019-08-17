@@ -49,6 +49,8 @@ class MoviesDatabaseImpl(retrofitConfig: RetrofitConfig) :
     override fun makeCallMoviesByGenre(genreId: String) =
         api.makeCallMoviesByGenre(genreId).enqueue(handleMoviesCallback)
 
+    override fun makeCallMoviesSearch(query: String) = api.makeCallMoviesSearch(query).enqueue(handleMoviesCallback)
+
     override fun loadMovies(movies: Movies) {
         if (moviesList.isNotEmpty())
             moviesList.clear()

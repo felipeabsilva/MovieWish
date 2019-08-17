@@ -22,5 +22,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application), K
 
     fun makeCallMoviesByGenre(genreId: String) = moviesRepository.makeCallMoviesByGenre(genreId)
 
+    fun makeCallMoviesSearch(query: String) = moviesRepository.makeCallMoviesSearch(query)
+
     fun getMovies(): LiveData<List<Movie>> = moviesRepository.getMovies()
 }

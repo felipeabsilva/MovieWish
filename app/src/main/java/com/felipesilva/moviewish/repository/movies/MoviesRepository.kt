@@ -9,4 +9,5 @@ interface MoviesRepository {
     fun makeCallMoviesSortByUpcoming()
     fun getMovies(): LiveData<List<Movie>>
     fun makeCallMoviesByGenre(genreId: String)
+    fun makeCallMoviesSearch(query: String)
 }

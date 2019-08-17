@@ -32,6 +32,16 @@ interface MovieAPI {
         @Query(API.Query.SORT_BY_KEY) sortBy: String = API.Query.SORT_BY_POPULARITY_DESC_VALUE
     ): Call<Movies>
 
+    @GET(API.Path.SEARCH_MOVIE)
+    fun makeCallMoviesSearch(
+        @Query(API.Query.QUERY_KEY) query: String,
+        @Query(API.Query.API_KEY_KEY) apiKey: String = API.Query.API_KEY_VALUE,
+        @Query(API.Query.SORT_BY_KEY) sortBy: String = API.Query.SORT_BY_POPULARITY_DESC_VALUE,
+        @Query(API.Query.LANGUAGE_KEY) language: String = API.Query.LANGUAGE_EN_US_VALUE,
+        @Query(API.Query.PAGE_KEY) page: Int = API.Query.PAGE_1_VALUE,
+        @Query(API.Query.INCLUDE_ADULT_KEY) includeAdult: Boolean = API.Query.FALSE_VALUE
+    ): Call<Movies>
+
     @Headers("${API.Header.AUTHORIZATION_KEY}: ${API.Header.AUTHORIZATION_VALUE}")
     @GET(API.Path.MOVIE_DISCOVER)
     fun makeCallMoviesByGenre(

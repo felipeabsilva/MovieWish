@@ -2,6 +2,7 @@ package com.felipesilva.moviewish.view.fragment
 
 import android.os.Bundle
 import android.view.*
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -38,6 +39,27 @@ class HomeFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         inflater?.inflate(R.menu.top_toolbar_menu, menu)
+
+        val searchItem = menu?.findItem(R.id.toolbar_search_button)
+
+        searchItem.let {
+            val searchView = searchItem?.actionView as SearchView
+
+            searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    query?.let {
+                        homeViewModel.makeCallMoviesSearch(it)
+                    }
+
+                    return true
+                }
+
+                override fun onQueryTextChange(query: String?): Boolean {
+                    return false
+                }
+
+            })
+        }
 
         menu?.let {
             it.findItem(R.id.toolbar_most_popular_filter).isChecked = true

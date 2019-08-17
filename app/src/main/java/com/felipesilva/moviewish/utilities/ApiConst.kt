@@ -21,11 +21,21 @@ object API {
         const val MOVIE_DISCOVER = "$API_VERSION_4/discover/movie"
         const val MOVIE_DETAILS = "$API_VERSION_3/movie/{$MOVIE_ID_KEY}"
         const val GENRE_LIST = "$API_VERSION_3/genre/movie/list"
+        const val SEARCH_MOVIE = "$API_VERSION_3/search/movie"
     }
 
     object Query {
         const val API_KEY_VALUE = "57178ec577bff44cab1aa9c634130c7c"
         const val API_KEY_KEY = "api_key"
+
+        const val QUERY_KEY = "query"
+
+        const val PAGE_KEY = "page"
+        const val PAGE_1_VALUE = 1
+
+        const val INCLUDE_ADULT_KEY = "include_adult"
+
+        const val FALSE_VALUE = false
 
         const val LANGUAGE_KEY = "language"
         const val LANGUAGE_EN_US_VALUE = "en-US"

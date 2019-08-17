@@ -25,6 +25,8 @@ class MoviesRepositoryImpl(private val moviesDatabase: MoviesDatabase) :
         }
     }
 
+    override fun makeCallMoviesSearch(query: String) = moviesDatabase.makeCallMoviesSearch(query)
+
     override fun makeCallMoviesSortedByMostPopular() = moviesDatabase.makeCallMoviesSortedByMostPopular()
 
     override fun makeCallMoviesSortByUpcoming() = moviesDatabase.makeCallMoviesSortByUpcoming()
